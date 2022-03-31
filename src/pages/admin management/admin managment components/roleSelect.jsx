@@ -60,17 +60,12 @@ function RoleSelect({onChange, oldValue}) {
     const postdata = async () => {
         try {
           const roomInfo = await axios({
-            url: `https://arr-dev.azurewebsites.net/api/v1/webs/role`,
-            headers: {
-                'Authorization': 'Bearer ' + access_token
-                },
+            url: `https://projectwebau.herokuapp.com/categories`,
             method: "GET",
-            data: {
-            }
         })
         .then((res) => {
-            console.log(res.data.data)
-            setData(res.data.data)
+            console.log(res.data)
+            setData(res.data)
         });
         } catch (err) {
           console.log(err);
@@ -82,13 +77,10 @@ function RoleSelect({onChange, oldValue}) {
 
     let options = []
     if (data !== null) {
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].roleId.toString() == "2" || data[i].roleId.toString() == "6") {
-            options.push( { value: data[i].roleId, label: data[i].roleName } )
-          }
-        }
+      data.forEach( e => {
+        options.push( { value: e.name, label: e.name } )
+      });
     }
-
     let defaultValue = "Not Specified"
     if (oldValue !== null) {defaultValue = oldValue}
 

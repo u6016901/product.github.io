@@ -10,84 +10,101 @@ import DeleteAdmin from "./deleteAdmin";
 
 const AdminTable = (props) =>  {
 
-  const [dataRow, setDataRow] = useState([])
   const [itemRow, setItemRow] = useState([])
-  const [memberId, setMemberId] = useState(null)
-  const [memberName, setMemberName] = useState(null)
+  const [dataWeb, setDataWeb] = useState([])
+  const [idFromTable, setIdFromTable] = useState()
+  const [codefromTable, setCodeFromTable] = useState()
+  const [amountfromTable, setAmountFromTable] = useState()
+  const [categoryNamefromTable, setCategoryNameFromTable] = useState()
+  const [dateFromTable, setDateFromTable] = useState()
 
   const [openModal, setOpenModal] = useState(false);
   const [openModal2, setOpenModal2] = useState(false);
   
   const access_token = sessionStorage.getItem("token")
 
-  const postdata = async () => {
-      try {
-        let status = window.sessionStorage.getItem("status")
-        let date = window.sessionStorage.getItem("date")
-
-        if (status == "Not Specified") { status = null }
-        if (date === "null") { date = null}
-
-        const allMonts = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        let monts = ""
-
-           
-        let count = 1
-
-        
-        
-        if (date !== null) {
-          allMonts.map( (e) => {
-            if (e === date.toString().slice(4,7)) {
-              if (count < 10) {
-                monts = "0" + count.toString()
-              }
-              else { monts = count.toString()}
-            }
-            count += 1
-          })
-          let newDate = (monts + "/" + date.toString().slice(8,10) + "/" + date.toString().slice(11,15))
-          date = newDate .toString() 
-        }
-        if (status !== null) {
-          status = status.toString()
-        }
-
-        const res = await axios({
-          url: "https://arr-dev.azurewebsites.net/api/v1/webs/admin",
-          headers: {
-              'Authorization': 'Bearer ' + access_token
-              },
-          method: "GET"
+  const postData = async () => {
+    try {
+     const res = await axios({
+        url: "https://projectwebau.herokuapp.com/transections",
+        method: "GET",
       })
       .then((res) => {
-          let itemData = res.data.data
-          console.log(itemData)
-          setDataRow(itemData)
-       });
+        console.log(res.data)
+        setDataWeb(res.data)
+      });
       } catch (err) {
-          console.log(err);
+        console.log(err);
       }
-   };
+  };
+
+  // const postdata = async () => {
+  //     try {
+
+        
+  //       let status = window.sessionStorage.getItem("status")
+  //       let date = window.sessionStorage.getItem("date")
+
+  //       if (status == "Not Specified") { status = null }
+  //       if (date === "null") { date = null}
+
+  //       const allMonts = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  //       let monts = ""
+
+           
+  //       let count = 1
+
+        
+        
+  //       if (date !== null) {
+  //         allMonts.map( (e) => {
+  //           if (e === date.toString().slice(4,7)) {
+  //             if (count < 10) {
+  //               monts = "0" + count.toString()
+  //             }
+  //             else { monts = count.toString()}
+  //           }
+  //           count += 1
+  //         })
+  //         let newDate = (monts + "/" + date.toString().slice(8,10) + "/" + date.toString().slice(11,15))
+  //         date = newDate .toString() 
+  //       }
+  //       if (status !== null) {
+  //         status = status.toString()
+  //       }
+
+  //       const res = await axios({
+  //         url: "https://arr-dev.azurewebsites.net/api/v1/webs/admin",
+  //         headers: {
+  //             'Authorization': 'Bearer ' + access_token
+  //             },
+  //         method: "GET"
+  //     })
+  //     .then((res) => {
+  //         let itemData = res.data.data
+  //         console.log(itemData)
+  //         setDataRow(itemData)
+  //      });
+  //     } catch (err) {
+  //         console.log(err);
+  //     }
+  //  };
 
   useEffect(() => {
-    postdata();
+    // postdata();
+    postData();
   },[]);
 
   useEffect(() => {
-    let dataArray = JSON.parse(JSON.stringify(dataRow))
-    console.log(dataRow)
+    let dataArray = JSON.parse(JSON.stringify(dataWeb))
     var reservationData = []
     dataArray.map((item,index)=>{
-
-      const memberIdFromTable = item.id
-      const memberNameFromTable = item.firstName + " " + item.lastName
-
-      // item.area = (
-      //   <div style={{ display: "flex", justifyContent: "space-between" }}>
-      //     AREA
-      //   </div>
-      // );
+      
+      const id = item._id
+      const code = item.code
+      const amount = item.amount
+      const categoryName = item.categoryName
+      const date = item.createAt
 
       item.modify = (
         <div>
@@ -98,7 +115,7 @@ const AdminTable = (props) =>  {
               color: "black",
               fontSize: "1rem",
             }}
-            onClick={() => onClickModify(memberIdFromTable)}
+            onClick={() => onClickModify(id, code, amount, categoryName, date)}
           > 
           </i>
         </div>
@@ -113,52 +130,48 @@ const AdminTable = (props) =>  {
               color: "black",
               fontSize: "1rem",
             }}
-            onClick={() => onClickDelete(memberIdFromTable, memberNameFromTable)}>
+            onClick={() => onClickDelete(id)}>
           </i>
         </div>
       );
+
+      item.createAt = item.createAt.toString().slice(0, 9)
 
      reservationData.push(item)
     })
 
       setItemRow(reservationData)
       
-    },[dataRow]);
+    },[dataWeb]);
 
   const data = {
     columns: [
       {
-        label: 'USERNAME',
-        field: 'userName',
+        label: 'CODE',
+        field: 'code',
         sort: 'asc',
         width: 50
       },
       {
-        label: 'FIRST NAME',
-        field: 'firstName',
+        label: 'CATEGORY',
+        field: 'categoryName',
         sort: 'acs',
         width: 50
       },
       {
-        label: 'LAST NAME',
-        field: 'lastName',
+        label: 'AMOUNT',
+        field: 'amount',
         sort: 'asc',
         width: 50
       },
       {
-        label: 'ROLE',
-        field: 'role',
-        sort: 'asc',
-        width: 50
-      },
-      {
-        label: 'AREA',
-        field: 'area',
+        label: 'TIME',
+        field: 'createAt',
         sort: 'asc',
         width: 80
       },
       {
-        label: 'MODIFY',
+        label: 'EDIT',
         field: 'modify',
         sort: 'asc',
         width: 80
@@ -177,15 +190,20 @@ const AdminTable = (props) =>  {
         return <Redirect to="/" />
       }
 
-  function onClickModify(memberIdFromTable) {
+  function onClickModify(id, code, amount, categoryName, date) {
     setOpenModal(true)
-    setMemberId(memberIdFromTable)
+    console.log(id)
+    setIdFromTable(id)
+    setCodeFromTable(code)
+    setAmountFromTable(amount)
+    setCategoryNameFromTable(categoryName)
+    setDateFromTable(date)
   }
 
-  function onClickDelete(memberIdFromTable, memberNameFromTable) {
+  function onClickDelete(id) {
     setOpenModal2(true)
-    setMemberId(memberIdFromTable)
-    setMemberName(memberNameFromTable)
+    console.log(id)
+    setIdFromTable(id)
   }
 
   return (
@@ -201,8 +219,8 @@ const AdminTable = (props) =>  {
         data={data}
       />
       <div>
-        {openModal && <ModifyAccount memberId={memberId} closeModal={setOpenModal} />}
-        {openModal2 && <DeleteAdmin memberId={memberId} closeModal={setOpenModal2} memberName={memberName} />}
+        {openModal && <ModifyAccount closeModal={setOpenModal} idFromTable={idFromTable} codeFromTable={codefromTable} amountFromTable={amountfromTable} categoryNameFromTable={categoryNamefromTable} dateFromTable={dateFromTable} />}
+        {openModal2 && <DeleteAdmin closeModal={setOpenModal2} id={idFromTable} />}
       </div>
     </div>
 

@@ -16,7 +16,7 @@ const AdminManagmentComponent = () => {
         
         <div class="room_management">
             <button className='create_room_button' onClick={() => {setOpenModal(true);}}>
-                <span class="links_name">Create Account</span>
+                <span class="links_name">New Transection</span>
             </button>
             <AdminTable />
             {openModal && <CreateAccount closeModal={setOpenModal} />}
