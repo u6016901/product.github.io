@@ -1,14 +1,104 @@
-#Kasemdet Soommart
-Company-quotation By Kasemdet Soommart
+# Getting Started with Create React App
 
-The web application has mostly four pages in terms of functionality. 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The user can sign in on the main page. 
+## Available Scripts
 
-The quotation page follows, allowing the user to create a new quotation directly from the form by inputting the item, price, and quantity. The data returned from the products collection is the item and price. The user picks an item from a drop-down menu, and the price is automatically calculated from the database. The user just enters an amount and clicks save, and the information is saved in MongoDB's quotation collection.
+In the project directory, you can run:
 
-The product management page, which is linked to the product collection and allows you to add, update, and delete new goods, is the third tab. 
+<<<<<<< HEAD
+### `yarn start`
 
-The quote management page is the final page, and it shows a list of items that have been saved in the quotation collection. The date, item name, number, price, amount, and total amount of all items show in a table. The date entered determines the order of the item. In addition, the user may add more quotes by clicking the create quote button, which will send them to the create-quotation page. 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Deployment Use Heroku to deploy the web application; a URL to the web application is supplied below.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+FrontEnd Kasidit Ploenthamakhun 6016901
+UI Chanoknon Tangthienkul 6217412
+BackEnd Kasemdet Soommart 6213639
+
+Name PersonalWallet Project
+
+Objective
+- Suitable for the user
+- Know the amount of saving
+- It's possible to keep track of it
+  by utilizing a category.
+
+- A user will see how much
+  money they spend per day and
+  whatever they use it for
+
+=======
+Function
+- Show overview accounting
+- Add/ Edit / Delete records
+- Types of categories can be added
+- Summary of income and expense in totals days/month/year (show graph in calendar)
+- Total transections of records (include category)
+
+MERN Stack
+
+
+
+
+BackEnd
+-https://github.com/maiyzaza/Project.github.io
+>>>>>>> 685fe25e62f3aafcafc174e0ca649b80915a0c4b
